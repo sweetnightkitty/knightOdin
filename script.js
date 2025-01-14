@@ -19,8 +19,8 @@ function knightMoves(start, end) {
 
     //Takes in an object
     function traverseGraph({path, vertex}) {
-        //When end is reached, path will be all steps taken
-        if(vertex == end) {
+        //When end is reached, traversal ends
+        if(JSON.stringify(vertex) == JSON.stringify(end)) {
             path.push(vertex);
             return path;
         }
@@ -33,10 +33,12 @@ function knightMoves(start, end) {
         const possiblePaths = possibleMoves.map((move) => {
             return {path:[...path, vertex], vertex: move}
         });
-        console.log("Did it work?");
-        console.log(possiblePaths);
+        
+        //Push the new moves to the queue
+        queue.push(...possiblePaths);
 
-
+        //Traverse the next item in the queue
+        return traverseGraph(queue.shift());
     }
 
 }
@@ -48,28 +50,55 @@ function getPossibleMoves(vertex) {
     const possibleMoves = [];
 
     let a = x - 2;
-    let b = y + 1;
-    if(x > 0 && x < 8 && y > 0 && y < 8) {
-        possibleMoves.push([a, b], [b, a]);
-    }
+    let b;
+    if(a > 0) {
+        b = y + 1;
+        if(b < 8) {
+            possibleMoves.push([a, b]);
+        }
 
-    a = x - 2;
-    b = y - 1;
-    if(x > 0 && x < 8 && y > 0 && y < 8) {
-        possibleMoves.push([a, b], [b, a]);
-    };
-
-    a = x - 1;
-    b = y - 2;
-    if(x > 0 && x < 8 && y > 0 && y < 8) {
-        possibleMoves.push([a, b], [b, a]);
+        b = y - 1;
+        if(b > 0) {
+            possibleMoves.push([a, b]);
+        }
     }
 
     a = x + 2;
-    b = y + 1;
-    if(x > 0 && x < 8 && y > 0 && y < 8) {
-        possibleMoves.push([a, b], [b, a]);
+    if(a < 8) {
+        b = y + 1;
+        if(b < 8) {
+            possibleMoves.push([a, b]);
+        }
+        b = y - 1;
+        if(b > 0) {
+            possibleMoves.push([a, b]);
+        }
     }
+
+    a = x - 1;
+    if(a > 0) {
+        b = y + 2;
+        if(b < 8) {
+            possibleMoves.push([a, b]);
+        }
+        b = y - 2;
+        if(b > 0) {
+            possibleMoves.push([a, b]);
+        }
+    }
+
+    a = x + 1;
+    if(a < 8) {
+        b = y + 2;
+        if(b < 8) {
+            possibleMoves.push([a, b]);
+        }
+        b = y - 2;
+        if(b > 0) {
+            possibleMoves.push([a, b]);
+        }
+    }
+
 
     return possibleMoves;
 }
