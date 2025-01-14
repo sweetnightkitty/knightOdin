@@ -16,6 +16,9 @@ function knightMoves(start, end) {
 
     //need a traverseGraph function
     const shortestPath = traverseGraph(queue.shift());
+    console.log(`start: [${start}], end: [${end}]`);
+    console.log(`You made it in ${shortestPath.length - 1} moves! Here's your path: `);
+    console.log(shortestPath);
 
     //Takes in an object
     function traverseGraph({path, vertex}) {
