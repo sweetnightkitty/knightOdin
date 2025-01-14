@@ -15,11 +15,32 @@ function knightMoves(start, end) {
     ];
 
     //need a traverseGraph function
-    // const shortestPath = traverseGraph(queue.shift());
+    const shortestPath = traverseGraph(queue.shift());
+
+    //Takes in an object
+    function traverseGraph({path, vertex}) {
+        //When end is reached, path will be all steps taken
+        if(vertex == end) {
+            path.push(vertex);
+            return path;
+        }
+
+        //Gets an array of all possible vertices
+        const possibleMoves = getPossibleMoves(vertex);
+
+        //For each possible move you copy the current path and vertex of the predecessor to the next item's path
+        //Then set the new vertex equal to that specific move
+        const possiblePaths = possibleMoves.map((move) => {
+            return {path:[...path, vertex], vertex: move}
+        });
+        console.log("Did it work?");
+        console.log(possiblePaths);
 
 
+    }
 
 }
+
 
 function getPossibleMoves(vertex) {
     const x = vertex[0];
