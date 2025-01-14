@@ -7,16 +7,27 @@ function knightMoves(start, end) {
         throw new Error("End vertex exceeds the game board.");
     }
 
+    const queue = [
+        {
+            path: [],
+            vertex: start
+        }
+    ];
+
+    //need a traverseGraph function
+    // const shortestPath = traverseGraph(queue.shift());
+
+
+
 }
 
-function possibleMoves(vertex) {
+function getPossibleMoves(vertex) {
     const x = vertex[0];
     const y = vertex[1];
     const possibleMoves = [];
 
     let a = x - 2;
     let b = y + 1;
-
     if(x > 0 && x < 8 && y > 0 && y < 8) {
         possibleMoves.push([a, b], [b, a]);
     }
@@ -54,4 +65,3 @@ function isValidVertex(vertex) {
 }
 
 const graph = knightMoves([3, 3], [4, 3]);
-console.log(possibleMoves([3, 3]));
